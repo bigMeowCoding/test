@@ -4,13 +4,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode:'production',
-    entry: './src/index.jsx',
+    entry: './src/index.tsx',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        filename: "bundle.js",
+        path: path.resolve(__dirname, 'build'),
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json"],
     },
     module: {
         rules: [{
-            test: /\.jsx?$/,
+            test: /\.(ts|tsx)$/,
             exclude: /node_modules/,
             use: {
                 loader: "babel-loader",
