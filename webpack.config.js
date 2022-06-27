@@ -1,42 +1,50 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-    mode:'production',
-    entry: './src/index.tsx',
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, 'build'),
-    },
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json"],
-    },
-    module: {
-        rules: [{
-            test: /\.(ts|tsx)$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader",
-            }
-        }],
-    },
-    performance: {
-        hints: false,
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000
-    },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
+  mode: "production",
+  entry: "./src/index.tsx",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "build"),
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
         },
-        compress: true,
-        port: 9000,
+      },
+    ],
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'index.html')
-        })],
-
+    compress: true,
+    port: 9000,
+    proxy: {
+      "/api3": {
+        target: "http://localhost:8888",
+        pathRewrite: { "^/api3": "" },
+      },
+    },
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "index.html"),
+    }),
+  ],
 };
