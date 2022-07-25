@@ -5,6 +5,7 @@ const env = process.env.NODE_ENV;
 module.exports = {
   mode: env,
   entry: "./src/index.tsx",
+  devtool: env === "development" ? "source-map" : false,
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
