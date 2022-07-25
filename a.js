@@ -1,2 +1,1 @@
-const util = require("util");
-console.log(util.types.isPromise(Promise.resolve(3)));
+console.log('3vvvvv22222')
