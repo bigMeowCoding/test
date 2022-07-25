@@ -1,9 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
+const env = process.env.NODE_ENV;
 module.exports = {
-  mode: "production",
+  mode: env,
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
@@ -22,9 +22,9 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.less$/i,
         include: path.resolve(__dirname, "src"),
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
       },
     ],
   },

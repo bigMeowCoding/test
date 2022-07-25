@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import request from "umi-request";
-
+import React from "react";
+import Counter from "./components/counter/counter";
+import Timer from "./components/timer/timer";
 const App = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <>
+      <Counter />
+      <Timer />
+    </>
+  );
 };
 export default App;
